@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}my_blog{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block content %}
+    {% if not request.session.is_login %}
+    <h1>没有登录，请登录</h1>
+    {% else %}
+        <div class="container">
+        <div class="col-md-6">
+    <h1>{{ request.session.user_name }}的个人博客管理界面</h1>
+        <div>
+            <a href="/my_blog/add_blog/">
+                <button type="button" class="btn btn-primary">新增文章</button>
+            </a>
+        </div>
+        {% for my_blog in my_blogs %}
+            <h2><a href="#"><b>{{ my_blog.blog_title }}</b></a> </h2>
+            <p class="text-secondary">{{ my_blog.blog_body|slice:'100' }}......</p>
+            <p class="small text-secondary">{{ my_blog.blog_update_time }}</p>
+            <p class="small text-right">删除</p>
+        {% endfor %}
+    {% endif %}
+        </div>
+{% endblock %}

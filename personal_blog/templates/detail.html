@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}detail{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container">
+<div class="col-md-10 col-md-offset-1">
+    <div class="text-left">
+        <!-- 标题及作者 -->
+        <h1 class="text-left page-header">{{ article_detail.blog_title }}</h1>
+        <!-- 视频地址 -->
+        {% if article_detail.blog_videoname %}
+        <div class="text-center">
+            <video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="600" height="300"
+                  poster="http://video-js.zencoder.com/oceans-clip.png"
+                  data-setup="{}">
+                <source src="/media/Forza.mp4" type='video/mp4' />
+                <track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+                <track kind="subtitles" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+
+            </video>
+        </div>
+        {% else %}
+        {% endif %}
+
+        <div class="col-12 alert alert-info">作者：{{ article_detail.author }} , 更新时间：{{ article_detail.blog_update_time }}</div>
+        <!-- 文章正文 -->
+        <div class="col-12">
+            <br><pre>{{ article_detail.blog_body }}</pre>><br/>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+<script src="{% static 'vide7.1.0/js/video.min.js'%}"></script>
+<script src="{% static 'vide7.1.0/js/videojs-ie8.min.js'%}"></script>

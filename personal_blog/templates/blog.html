@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Blog{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block content %}
+    {% if not request.session.is_login %}
+    <h1>这是Blog页面！您尚未登录</h1>
+    {% else %}
+    <div class="container">
+    <div class="col-md-6">
+    <div class="page-header">
+        <h1>博客</h1>
+    </div>
+    {% for blog in blogs %}
+    <h2><a href="article_detail/{{ blog.id }}/"><b>{{ blog.blog_title }}</b></a> </h2>
+        <p class="text-secondary">{{ blog.blog_body|slice:'100' }}......</p>
+        <p class="small text-secondary">{{ blog.blog_update_time }}</p>
+        <p class="small text-right">作者:{{ blog.author }}</p>
+    {% endfor %}
+    </div>
+    </div>
+
+    {% endif %}
+{% endblock %}
