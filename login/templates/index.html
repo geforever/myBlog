@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}主页{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+{% block content %}
+    {% if request.session.is_login %}
+        <h1>你好,{{ request.session.user_name }}!欢迎回来</h1>
+    {% else %}
+        <div class="col-md-4 col-md-offset-1">
+        <h1>尚未登录，无法访问!</h1>
+        </div>
+    {% endif %}
+{% endblock %}
